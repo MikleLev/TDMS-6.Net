@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,41 +9,54 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TDMS
 {
-    class ParentLetter
+    public class ParentLetter
     {
-        public int ID { get; set; }
-        public string type { get; set; }//сопроводительное или исходящее
-        public int number { get; set; }
+        public int Id { get; set; }
+        public string? Type { get; set; }//сопроводительное или исходящее
+        public int Number { get; set; }
         public DateTime DateTime { get; set; }
-        public string nameObgect { get; set; }
-        public string from { get; set; }
-        public string to { get; set; } 
-        
+        public int ProjectId { get; set; }
+        public virtual Project? Project { get; set; }
+        public virtual User? From { get; set; }
+        public virtual User? To { get; set; }
+
         //public File f { get; set; }
+        //public List<ParentLetter> parentLetters { get; set; }
     }
-    class Company
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public List<User> Users { get; set; } = new();
-    }
-    class User
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
 
+    public class Project
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
         public int CompanyId { get; set; }
-        public Company? Company { get; set; }
+        public virtual Company? Company { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
-    class OutgoingLetter:ParentLetter 
-    { 
-
+    public class Company
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public virtual List<User> Users { get; set; } = new(); // сотрудники компании
+        
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
-    class IncomingLetter : ParentLetter 
-    { 
-
+    public class User
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public int CompanyId { get; set; }
+        public virtual Company? Company { get; set; }  // компания пользователя
+        public override string ToString()
+        {
+            return Name;
+        }
     }
-
 }

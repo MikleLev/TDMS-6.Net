@@ -9,9 +9,10 @@ namespace TDMS
 {
     class LetterContext : DbContext
     {
-        private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=T;Trusted_Connection=True;";
+        private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=CompanyTdb;Trusted_Connection=True;";
 
         public DbSet<ParentLetter> Letters { get; set; } = null!;
+        public DbSet<Project> Project { get; set; } = null!;
         public DbSet<Company> Companies { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
 
@@ -19,6 +20,5 @@ namespace TDMS
         {
             optionsBuilder.UseSqlServer(ConnectionString);
         }
-
     }
 }
