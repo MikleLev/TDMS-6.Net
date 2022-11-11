@@ -22,8 +22,12 @@ namespace TDMS
             db = new LetterContext();
             db.Database.EnsureCreated();
             db.Letters.Load();
+            db.Project.Load();
+            db.Companies.Load();
+            db.Users.Load();
 
             dataGridView1.DataSource = db.Letters.Local.ToBindingList();
+            dataGridView2.DataSource = db.Users.Local.ToBindingList();
         }
 
 
@@ -55,12 +59,12 @@ namespace TDMS
                 return;
 
             ParentLetter parentLetter = new ParentLetter();
-            parentLetter.type = ltForm.textBox1.Text;  //player.Position = plForm.comboBox1.SelectedItem.ToString();
-            parentLetter.number = (int)ltForm.numericUpDown1.Value;
+            parentLetter.Type = ltForm.textBox1.Text;  //player.Position = plForm.comboBox1.SelectedItem.ToString();
+            parentLetter.Number = (int)ltForm.numericUpDown1.Value;
             parentLetter.DateTime = ltForm.dateTimePicker1.Value;
-            parentLetter.nameObgect = ltForm.textBox2.Text;
-            parentLetter.to = ltForm.textBox3.Text;
-            parentLetter.from = ltForm.textBox4.Text;
+            parentLetter.Project.Name = ltForm.textBox2.Text;
+            parentLetter.To.Name = ltForm.textBox3.Text;
+            parentLetter.From.Name = ltForm.textBox4.Text;
             //файл
 
             db.Letters.Add(parentLetter);
@@ -83,12 +87,12 @@ namespace TDMS
 
                 LetterForm ltForm = new LetterForm();
 
-                ltForm.textBox1.Text = parentLetter.type;//
-                ltForm.numericUpDown1.Value = parentLetter.number;
+                ltForm.textBox1.Text = parentLetter.Type;//
+                ltForm.numericUpDown1.Value = parentLetter.Number;
                 ltForm.dateTimePicker1.Value = parentLetter.DateTime;
-                ltForm.textBox2.Text = parentLetter.nameObgect;
-                ltForm.textBox3.Text = parentLetter.to;
-                ltForm.textBox4.Text = parentLetter.from;
+                ltForm.textBox2.Text = parentLetter.Project.Name;
+                ltForm.textBox3.Text = parentLetter.To.Name;
+                ltForm.textBox4.Text = parentLetter.From.Name;
                 //файл
                 
                 DialogResult result= ltForm.ShowDialog(this);
@@ -96,12 +100,12 @@ namespace TDMS
                 if (result==DialogResult.Cancel)
                     return;
 
-                parentLetter.type = ltForm.textBox1.Text;  //player.Position = plForm.comboBox1.SelectedItem.ToString();
-                parentLetter.number = (int)ltForm.numericUpDown1.Value;
+                parentLetter.Type = ltForm.textBox1.Text;  //player.Position = plForm.comboBox1.SelectedItem.ToString();
+                parentLetter.Number = (int)ltForm.numericUpDown1.Value;
                 parentLetter.DateTime = ltForm.dateTimePicker1.Value;
-                parentLetter.nameObgect = ltForm.textBox2.Text;
-                parentLetter.to = ltForm.textBox3.Text;
-                parentLetter.from = ltForm.textBox4.Text;
+                parentLetter.Project.Name = ltForm.textBox2.Text;
+                parentLetter.To.Name = ltForm.textBox3.Text;
+                parentLetter.From.Name = ltForm.textBox4.Text;
                 //файл
 
                 db.SaveChanges();
@@ -151,6 +155,11 @@ namespace TDMS
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void parentLetterBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
