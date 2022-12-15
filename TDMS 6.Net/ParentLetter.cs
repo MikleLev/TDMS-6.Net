@@ -12,7 +12,7 @@ namespace TDMS
     public class ParentLetter
     {
         public int Id { get; set; }
-        public string? Type { get; set; }//сопроводительное или исходящее
+        public string? Type { get; set; }//сопроводительное или исходящее, оставлю как есть, могут быть еще заказными и т.п
         public int Number { get; set; }
         public DateTime DateTime { get; set; }
         public int ProjectId { get; set; }
