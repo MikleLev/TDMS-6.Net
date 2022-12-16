@@ -59,7 +59,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.buttonShow = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -344,7 +343,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.buttonShow);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.listBox1);
             this.tabPage3.Controls.Add(this.panel3);
@@ -356,16 +354,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Компания";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // buttonShow
-            // 
-            this.buttonShow.Location = new System.Drawing.Point(514, 75);
-            this.buttonShow.Name = "buttonShow";
-            this.buttonShow.Size = new System.Drawing.Size(75, 23);
-            this.buttonShow.TabIndex = 38;
-            this.buttonShow.Text = "Показать";
-            this.buttonShow.UseVisualStyleBackColor = true;
-            this.buttonShow.Click += new System.EventHandler(this.buttonShow_Click);
             // 
             // label2
             // 
@@ -384,7 +372,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(203, 124);
             this.listBox1.TabIndex = 36;
-            //this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -443,7 +430,6 @@
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             this.dataGridView3.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_RowEnter);
-            this.dataGridView3.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView3_RowStateChanged);
             this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
             // 
             // idDataGridViewTextBoxColumn2
@@ -625,6 +611,5 @@
         private Button button10;
         protected internal ListBox listBox1;
         private Label label2;
-        private Button buttonShow;
     }
 }
