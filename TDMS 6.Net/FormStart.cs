@@ -271,25 +271,7 @@ namespace TDMS
                 listBox1.DisplayMember = "Name";
             }
         }
-        private void dataGridView3_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            
-        }
-        private void buttonShow_Click(object sender, EventArgs e)
-        {
-            if (dataGridView3.SelectedRows.Count > 0)
-            {
-                int index = dataGridView3.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-
-                Company company = db.Companies.Find(id);
-                listBox1.DataSource = company.Users.ToList();
-                listBox1.DisplayMember = "Name";
-            }
-        }
+        
         //добавление
         private void button7_Click(object sender, EventArgs e)
         {
