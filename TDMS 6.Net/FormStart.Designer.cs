@@ -37,13 +37,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -77,6 +70,16 @@
             this.idDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.companyDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ToDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.parentLetterBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -94,6 +97,9 @@
             this.tabPage4.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // parentLetterBindingSource
@@ -160,57 +166,16 @@
             this.dateTimeDataGridViewTextBoxColumn,
             this.projectDataGridViewTextBoxColumn,
             this.fromDataGridViewTextBoxColumn,
-            this.toDataGridViewTextBoxColumn});
+            this.ToDataGridViewComboBoxColumn});
             this.dataGridView1.DataSource = this.parentLetterBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(743, 483);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Тип";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            // 
-            // dateTimeDataGridViewTextBoxColumn
-            // 
-            this.dateTimeDataGridViewTextBoxColumn.DataPropertyName = "DateTime";
-            this.dateTimeDataGridViewTextBoxColumn.HeaderText = "Дата";
-            this.dateTimeDataGridViewTextBoxColumn.Name = "dateTimeDataGridViewTextBoxColumn";
-            // 
-            // projectDataGridViewTextBoxColumn
-            // 
-            this.projectDataGridViewTextBoxColumn.DataPropertyName = "Project";
-            this.projectDataGridViewTextBoxColumn.HeaderText = "Проект";
-            this.projectDataGridViewTextBoxColumn.Name = "projectDataGridViewTextBoxColumn";
-            // 
-            // fromDataGridViewTextBoxColumn
-            // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "From";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "От";
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
-            // 
-            // toDataGridViewTextBoxColumn
-            // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "To";
-            this.toDataGridViewTextBoxColumn.HeaderText = "Кому";
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
             // 
             // button3
             // 
@@ -531,6 +496,68 @@
             this.companyDataGridViewTextBoxColumn1.HeaderText = "Компания";
             this.companyDataGridViewTextBoxColumn1.Name = "companyDataGridViewTextBoxColumn1";
             // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(TDMS.User);
+            // 
+            // toBindingSource1
+            // 
+            this.toBindingSource1.DataMember = "To";
+            this.toBindingSource1.DataSource = this.parentLetterBindingSource;
+            // 
+            // toBindingSource
+            // 
+            this.toBindingSource.DataMember = "To";
+            this.toBindingSource.DataSource = this.parentLetterBindingSource;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Тип";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateTimeDataGridViewTextBoxColumn
+            // 
+            this.dateTimeDataGridViewTextBoxColumn.DataPropertyName = "DateTime";
+            this.dateTimeDataGridViewTextBoxColumn.HeaderText = "Дата";
+            this.dateTimeDataGridViewTextBoxColumn.Name = "dateTimeDataGridViewTextBoxColumn";
+            this.dateTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // projectDataGridViewTextBoxColumn
+            // 
+            this.projectDataGridViewTextBoxColumn.DataPropertyName = "Project";
+            this.projectDataGridViewTextBoxColumn.HeaderText = "Проект";
+            this.projectDataGridViewTextBoxColumn.Name = "projectDataGridViewTextBoxColumn";
+            this.projectDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fromDataGridViewTextBoxColumn
+            // 
+            this.fromDataGridViewTextBoxColumn.DataPropertyName = "From";
+            this.fromDataGridViewTextBoxColumn.HeaderText = "От";
+            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ToDataGridViewComboBoxColumn
+            // 
+            this.ToDataGridViewComboBoxColumn.HeaderText = "Кому";
+            this.ToDataGridViewComboBoxColumn.Name = "ToDataGridViewComboBoxColumn";
+            this.ToDataGridViewComboBoxColumn.ReadOnly = true;
+            // 
             // FormStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -558,6 +585,9 @@
             this.tabPage4.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -576,13 +606,6 @@
         private Button button2;
         private Button button1;
         private TabPage tabPage3;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dateTimeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn fromDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn toDataGridViewTextBoxColumn;
         private DataGridView dataGridView2;
         private BindingSource projectBindingSource;
         private TabPage tabPage4;
@@ -611,5 +634,16 @@
         private Button button10;
         protected internal ListBox listBox1;
         private Label label2;
+        private DataGridViewComboBoxColumn toDataGridViewTextBoxColumn;
+        private BindingSource toBindingSource;
+        private BindingSource userBindingSource;
+        private BindingSource toBindingSource1;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateTimeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn fromDataGridViewTextBoxColumn;
+        private DataGridViewComboBoxColumn ToDataGridViewComboBoxColumn;
     }
 }
