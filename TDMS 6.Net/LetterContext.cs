@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,18 @@ namespace TDMS
 {
     class LetterContext : DbContext
     {
-        private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=Company9;Trusted_Connection=True;";
+        private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=Company11;Trusted_Connection=True;";
 
         public DbSet<ParentLetter> Letters { get; set; } = null!;
         public DbSet<Project> Project { get; set; } = null!;
         public DbSet<Company> Companies { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
+
+        public LetterContext()
+        {
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,19 +30,12 @@ namespace TDMS
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<ParentLetter>()
-            //        .HasMany(c => c.To)
-            //        .WithMany(s => s.Letters);
-            //modelBuilder.Entity<User>()
-            //        .HasMany(c => c.Letters)
-            //        .WithMany(s => s.To);
-            modelBuilder.Entity<ParentLetter>()
-                    .HasMany(c => c.To)
-                    .WithMany(s => s.Letters);
-
-            //modelBuilder.Entity<Course>()
-            //    .HasMany(c => c.Students)
-            //    .WithMany(s => s.Courses)
+            modelBuilder.Entity<User>()
+                    .HasMany(c => c.LettersTo)
+                    .WithMany(s => s.To);
+            modelBuilder.Entity<User>()
+                    .HasMany(c => c.LettersFrom)
+                    .WithOne(s => s.From);
         }
     }
 }

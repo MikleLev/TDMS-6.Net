@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,8 @@ namespace TDMS
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public int CompanyId { get; set; }
-        public virtual Company? Company { get; set; }
+        //public int CompanyId { get; set; }
+        //public virtual Company? Company { get; set; }
         public override string ToString()
         {
             return Name;
@@ -59,7 +60,8 @@ namespace TDMS
         public string? Name { get; set; }
         public int CompanyId { get; set; }
         public virtual Company? Company { get; set; }  // компания пользователя
-        public List<ParentLetter> Letters { get; set; } = new();
+        public virtual List<ParentLetter> LettersFrom { get; set; } = new();
+        public virtual List<ParentLetter> LettersTo { get; set; } = new();
         public override string ToString()
         {
             return Name;

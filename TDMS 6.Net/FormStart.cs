@@ -22,7 +22,6 @@ namespace TDMS
             InitializeComponent();
 
             db = new LetterContext();
-            db.Database.EnsureCreated();
             db.Letters.Load();
             db.Project.Load();
             db.Companies.Load();
@@ -53,7 +52,21 @@ namespace TDMS
 
         }
 
-        //            Letter
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, e.RowIndex].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                ParentLetter parentLetter = db.Letters.Include(s => s.To).FirstOrDefault(s => s.Id == id);
+                listBoxTo.DataSource = parentLetter?.To.ToList();
+                listBoxTo.DisplayMember = "Name";
+            }
+        }
+
         // добавление
         private void button1_Click(object sender, EventArgs e)
         {
@@ -100,66 +113,90 @@ namespace TDMS
         //изменение
         private void button2_Click_1(object sender, EventArgs e)
         {
-            //if (dataGridView1.SelectedRows.Count>0)
-            //{
-            //    int index = dataGridView1.SelectedRows[0].Index;
-            //    int id = 0;
-            //    bool converted = Int32.TryParse(dataGridView1[0,index].Value.ToString(), out id);
-            //    if (converted == false)
-            //        return;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int index = dataGridView1.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
 
-            //    ParentLetter parentLetter =db.Letters.Find(id);
+                ParentLetter parentLetter = db.Letters.Include(s => s.To).FirstOrDefault(s => s.Id == id);
 
-            //    LetterForm ltForm = new LetterForm();
+                LetterForm ltForm = new LetterForm();
 
-            //    ltForm.textBox1.Text = parentLetter.Type;
-            //    ltForm.numericUpDown1.Value = parentLetter.Number;
-            //    ltForm.dateTimePicker1.Value = parentLetter.DateTime;
+                ltForm.textBox1.Text = parentLetter.Type;
+                ltForm.numericUpDown1.Value = parentLetter.Number;
+                ltForm.dateTimePicker1.Value = parentLetter.DateTime;
 
-            //    List<Project> projects = db.Project.ToList();
-            //    ltForm.comboBox1.DataSource = projects;
-            //    ltForm.comboBox1.ValueMember = "Id";
-            //    ltForm.comboBox1.DisplayMember = "Name";
-            //    if (parentLetter.Project!=null)
-            //    {
-            //        ltForm.comboBox1.SelectedValue = parentLetter.Project.Id;
-            //    }
+                List<Project> projects = db.Project.ToList();
+                ltForm.comboBox1.DataSource = projects;
+                ltForm.comboBox1.ValueMember = "Id";
+                ltForm.comboBox1.DisplayMember = "Name";
+                if (parentLetter.Project != null)
+                {
+                    ltForm.comboBox1.SelectedValue = parentLetter.Project.Id;
+                }
 
-            //    List<User> usersFrom = db.Users.ToList();
-            //    ltForm.comboBox2.DataSource = usersFrom;
-            //    ltForm.comboBox2.ValueMember = "Id";
-            //    ltForm.comboBox2.DisplayMember = "Name";
-            //    if (parentLetter.From != null)
-            //    {
-            //        ltForm.comboBox2.SelectedValue = parentLetter.From.Id;
-            //    }
+                List<User> usersFrom = db.Users.ToList();
+                ltForm.comboBox2.DataSource = usersFrom;
+                ltForm.comboBox2.ValueMember = "Id";
+                ltForm.comboBox2.DisplayMember = "Name";
+                if (parentLetter.From != null)
+                {
+                    ltForm.comboBox2.SelectedValue = parentLetter.From.Id;
+                }
 
-            //    List<User> usersTo = db.Users.ToList();
-            //    ltForm.comboBox3.DataSource = usersTo;
-            //    ltForm.comboBox3.ValueMember = "Id";
-            //    ltForm.comboBox3.DisplayMember = "Name";
-            //    if (parentLetter.To != null)
-            //    {
-            //        ltForm.comboBox3.SelectedValue = parentLetter.To.Id;
-            //    }
+                List<User> usersTo = db.Users.ToList();
+                ltForm.listBox1.DataSource = usersTo;
+                ltForm.listBox1.ValueMember = "Id";
+                ltForm.listBox1.DisplayMember = "Name";
+                ltForm.listBox1.SelectedItems.Clear();
+                if (parentLetter.To != null)
+                {
+                    foreach (User user in parentLetter.To)
+                        ltForm.listBox1.SelectedItem= user;//= user.Id
+                    //foreach (var item in ltForm.listBox1.SelectedItems)
+                    //{
+                    //    ltForm.listBox1.SelectedValue = parentLetter.To;
+                    //    //usersTo.Add((User)item);
+                    //}
+                    ////ltForm.listBox1.SelectedValue = parentLetter.To.Id;
+                }
 
-            //    DialogResult result= ltForm.ShowDialog(this);
-            //    if (result==DialogResult.Cancel)
-            //        return;
+                DialogResult result = ltForm.ShowDialog(this);
+                if (result == DialogResult.Cancel)
+                    return;
 
-            //    parentLetter.Type = ltForm.textBox1.Text;
-            //    parentLetter.Number = (int)ltForm.numericUpDown1.Value;
-            //    parentLetter.DateTime = ltForm.dateTimePicker1.Value;
-            //    parentLetter.Project = (Project)ltForm.comboBox1.SelectedItem;
-            //    parentLetter.From = (User)ltForm.comboBox2.SelectedItem;
-            //    parentLetter.To = (User)ltForm.comboBox3.SelectedItem;
-            //    //файл
+                parentLetter.Type = ltForm.textBox1.Text;
+                parentLetter.Number = (int)ltForm.numericUpDown1.Value;
+                parentLetter.DateTime = ltForm.dateTimePicker1.Value;
+                parentLetter.Project = (Project)ltForm.comboBox1.SelectedItem;
+                parentLetter.From = (User)ltForm.comboBox2.SelectedItem;
+                foreach(User user in usersTo)
+                {
+                    if (ltForm.listBox1.SelectedItems.Contains(user))
+                    {
+                        if (!parentLetter.To.Contains(user))
+                            parentLetter.To.Add(user);
+                    }
+                    else
+                    {
+                        if(parentLetter.To.Contains(user))
+                            parentLetter.To.Remove(user);
+                    }
+                }
+                //foreach (var item in ltForm.listBox1.SelectedItems)
+                //{
+                //    usersTo.Add((User)item);
+                //}
+                //файл
 
-            //    db.Entry(parentLetter).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    dataGridView1.Refresh();
-            //    MessageBox.Show("Объект обновлен");
-            //}
+                db.Entry(parentLetter).State = EntityState.Modified;
+                db.SaveChanges();
+                dataGridView1.Refresh();
+                MessageBox.Show("Объект обновлен");
+            }
         }
         // удаление
         private void button3_Click_1(object sender, EventArgs e)
@@ -180,16 +217,15 @@ namespace TDMS
             }
         }
 
-        //           Project
-        //добавление
+        //добавление    Project
         private void button4_Click(object sender, EventArgs e)
         {
             ProjectForm pjForm = new ProjectForm();
 
-            List<Company> companies = db.Companies.ToList();
-            pjForm.comboBox1.DataSource = companies;
-            pjForm.comboBox1.ValueMember = "Id";
-            pjForm.comboBox1.DisplayMember = "Name";
+            //List<Company> companies = db.Companies.ToList();
+            //pjForm.comboBox1.DataSource = companies;
+            //pjForm.comboBox1.ValueMember = "Id";
+            //pjForm.comboBox1.DisplayMember = "Name";
 
             DialogResult result = pjForm.ShowDialog(this);
 
@@ -198,7 +234,7 @@ namespace TDMS
 
             Project project = new Project();
             project.Name = pjForm.textBox1.Text;
-            project.Company = (Company)pjForm.comboBox1.SelectedItem;
+            //project.Company = (Company)pjForm.comboBox1.SelectedItem;
 
             db.Project.Add(project);
             db.SaveChanges();
@@ -219,21 +255,21 @@ namespace TDMS
                 ProjectForm pjForm = new ProjectForm();
                 pjForm.textBox1.Text = project.Name;
 
-                List<Company> companies = db.Companies.ToList();
-                pjForm.comboBox1.DataSource = companies;
-                pjForm.comboBox1.ValueMember = "Id";
-                pjForm.comboBox1.DisplayMember = "Name";
-                if (project.Company != null)
-                {
-                    pjForm.comboBox1.SelectedValue = project.Company.Id;
-                }
+                //List<Company> companies = db.Companies.ToList();
+                //pjForm.comboBox1.DataSource = companies;
+                //pjForm.comboBox1.ValueMember = "Id";
+                //pjForm.comboBox1.DisplayMember = "Name";
+                //if (project.Company != null)
+                //{
+                //    pjForm.comboBox1.SelectedValue = project.Company.Id;
+                //}
 
                 DialogResult result = pjForm.ShowDialog(this);
                 if (result == DialogResult.Cancel)
                     return;
 
                 project.Name = pjForm.textBox1.Text;
-                project.Company = (Company)pjForm.comboBox1.SelectedItem;
+                //project.Company = (Company)pjForm.comboBox1.SelectedItem;
 
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
@@ -262,7 +298,6 @@ namespace TDMS
         }
 
         //           Company
-        //
         private void dataGridView3_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -277,7 +312,6 @@ namespace TDMS
                 listBox1.DisplayMember = "Name";
             }
         }
-        
         //добавление
         private void button7_Click(object sender, EventArgs e)
         {
@@ -342,8 +376,7 @@ namespace TDMS
             }
         }
 
-        //           User
-        //добавление
+        //добавление    User
         private void button10_Click(object sender, EventArgs e)
         {
             UserForm usForm = new UserForm();
@@ -451,11 +484,6 @@ namespace TDMS
 
         }
 
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void tabPage1_Click_1(object sender, EventArgs e)
         {
 
@@ -476,6 +504,24 @@ namespace TDMS
             
         }
 
-        
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        private void listBoxTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
