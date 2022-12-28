@@ -30,16 +30,14 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(176, 155);
+            this.button2.Location = new System.Drawing.Point(175, 101);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 28;
@@ -49,21 +47,12 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(83, 155);
+            this.button1.Location = new System.Drawing.Point(82, 101);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 27;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 15);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Компания";
             // 
             // label1
             // 
@@ -81,23 +70,13 @@
             this.textBox1.Size = new System.Drawing.Size(203, 23);
             this.textBox1.TabIndex = 23;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(203, 23);
-            this.comboBox1.TabIndex = 29;
-            // 
             // ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 214);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(321, 150);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "ProjectForm";
@@ -112,9 +91,7 @@
 
         private Button button2;
         private Button button1;
-        private Label label2;
         private Label label1;
         protected internal TextBox textBox1;
-        protected internal ComboBox comboBox1;
     }
 }

@@ -41,8 +41,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,7 +119,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 269);
+            this.label7.Location = new System.Drawing.Point(23, 357);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 15);
             this.label7.TabIndex = 10;
@@ -128,7 +128,7 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(78, 328);
+            this.button1.Location = new System.Drawing.Point(76, 416);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 13;
@@ -138,7 +138,7 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(171, 328);
+            this.button2.Location = new System.Drawing.Point(169, 416);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 14;
@@ -163,15 +163,6 @@
             this.comboBox2.TabIndex = 16;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(76, 227);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(211, 23);
-            this.comboBox3.TabIndex = 17;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(78, 64);
@@ -184,13 +175,23 @@
             this.numericUpDown1.Size = new System.Drawing.Size(209, 23);
             this.numericUpDown1.TabIndex = 18;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(78, 230);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBox1.Size = new System.Drawing.Size(209, 109);
+            this.listBox1.TabIndex = 19;
+            // 
             // LetterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 386);
+            this.ClientSize = new System.Drawing.Size(321, 473);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
@@ -227,7 +228,7 @@
         protected internal System.Windows.Forms.DateTimePicker dateTimePicker1;
         protected internal ComboBox comboBox1;
         protected internal ComboBox comboBox2;
-        protected internal ComboBox comboBox3;
         protected internal NumericUpDown numericUpDown1;
+        protected internal ListBox listBox1;
     }
 }
